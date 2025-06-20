@@ -152,7 +152,7 @@ npm run dev
 > React app will open at `http://localhost:5173`
 ```
 
-manually go this frontend route to test the API's
+manually go to this frontend routes to test the API's
 
 1.Signup:http://localhost:5173/signup
 2.Login:http://localhost:5173/login
