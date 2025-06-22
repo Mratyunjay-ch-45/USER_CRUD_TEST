@@ -6,6 +6,11 @@ exports.createUser = async (req, res) => {
     try {
         const { fname, lname, dob, email, password, gender } = req.body;
 
+        // ✅ Check for required fields before hitting DB
+        if (!fname || !lname || !dob || !email || !password || !gender) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ message: "User already exists" });
@@ -49,7 +54,7 @@ exports.loginUser = async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Server error", error: err.message });
+        res.status(400).json({ message: "Server error", error: err.message });
     }
 };
 

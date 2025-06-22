@@ -1,134 +1,94 @@
-# 🧑‍💻 USER_CRUD_TEST — MERN Stack
+# 🧑‍💻 USER\_CRUD\_TEST — MERN Stack CRUD App with Testing
 
-This is a full-stack user management system built using **MongoDB, Express, React, and Node.js**. It includes a complete set of **RESTful APIs** for managing users along with a responsive frontend for interaction.
+A full-stack user management system built using **MongoDB, Express.js, React, and Node.js**, complete with **RESTful APIs**, a clean React frontend, and **automated testing using Jest and Supertest**.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-- User Signup and Login
-- Get User by Email
-- Update User Details
-- Delete User Account
-- Clean and responsive frontend UI (React + Tailwind CSS)
+- ✅ User Signup & Login
+- 🔍 Get User by Email
+- ✏️ Update User Details
+- ❌ Delete User Account
+- 📆 MongoDB + Mongoose Integration
+- 🧲 Unit, Integration & API Testing
+- 🎨 Responsive UI with React & Tailwind CSS
 
 ---
 
 ## 📌 Technologies Used
 
-| Layer      | Technology     |
-|------------|----------------|
+| Layer      | Technology           |
+| ---------- | -------------------- |
 | Frontend   | React + Tailwind CSS |
-| Backend    | Node.js + Express |
-| Database   | MongoDB (with Mongoose) |
-| API Format | RESTful + JSON |
+| Backend    | Node.js + Express.js |
+| Database   | MongoDB + Mongoose   |
+| Testing    | Jest + Supertest     |
+| API Format | RESTful + JSON       |
 
 ---
 
 ## 📘 API Endpoints
 
-| Method | Endpoint                            | Description                     |
-|--------|-------------------------------------|---------------------------------|
-| POST   | `/api/auth/signup`                  | Register a new user             |
-| POST   | `/api/auth/login`                   | Login with email & password     |
-| GET    | `/api/auth/getuser?email=...`       | Retrieve user by email          |
-| PUT    | `/api/auth/updateuser?email=...`    | Update user data by email       |
-| DELETE | `/api/auth/deleteuser?email=...`    | Delete user account by email    |
+| Method | Endpoint                         | Description                  |
+| ------ | -------------------------------- | ---------------------------- |
+| POST   | `/api/auth/signup`               | Register a new user          |
+| POST   | `/api/auth/login`                | Login with email & password  |
+| GET    | `/api/auth/getuser?email=...`    | Retrieve user by email       |
+| PUT    | `/api/auth/updateuser?email=...` | Update user data by email    |
+| DELETE | `/api/auth/deleteuser?email=...` | Delete user account by email |
 
 ---
 
-## 🧪 Sample API Requests
+## 🧲 Testing Overview
 
-### 🔹 Signup
+This project includes **unit, integration, and API tests** using:
 
-```http
-POST /api/auth/signup
-Content-Type: application/json
+- **Jest** — JavaScript testing framework.
+- **Supertest** — HTTP assertions for API routes.
 
-{
-  "fname": "John",
-  "lname": "Doe",
-  "dob": "2000-01-01",
-  "email": "john@example.com",
-  "password": "secure123",
-  "gender": "male"
-}
+### ✅ Run Tests:
+
+```bash
+npm run test
 ```
 
-### 🔹 Login
+> This runs all test suites with code coverage enabled.
 
-```http
-POST /api/auth/login
-Content-Type: application/json
+### 🚽 Sample API Test (Login):
 
-{
-  "email": "john@example.com",
-  "password": "secure123"
-}
-```
-
-### 🔹 Get User
-
-```http
-GET /api/auth/getuser?email=john@example.com
-```
-
-### 🔹 Update User
-
-```http
-PUT /api/auth/updateuser?email=john@example.com
-Content-Type: application/json
-
-{
-  "fname": "Johnny",
-  "gender": "male"
-}
-```
-
-### 🔹 Delete User
-
-```http
-DELETE /api/auth/deleteuser?email=john@example.com
-```
-
----
-
-## 🧰 Database Integration
-
-This project uses **MongoDB** as the database, and **Mongoose** for object modeling.
-
-- Connect to MongoDB in `server.js`:
 ```js
-mongoose.connect("mongodb://127.0.0.1:27017/Keploy");
-
-```
-
-- Define user schema in `models/User.js`:
-```js
-const userSchema = new mongoose.Schema({
-  fname: String,
-  lname: String,
-  dob: Date,
-  email: String,
-  password: String,
-  gender: String
+it("should return 400 for invalid email", async () => {
+  const res = await request(app).post("/api/auth/login").send({
+    email: "wrong@example.com",
+    password: "wrongpass"
+  });
+  expect(res.statusCode).toBe(400);
 });
 ```
 
 ---
 
+## 📊 Test Coverage Screenshot
+
+
+
+> You can find this image in the `screenshots/` folder. It shows coverage percentage for each layer (controller, model, route).
+
+---
+
 ## ⚙️ How to Run the Project
 
-### 📦 1. Clone the Repository
+### 1. 📦 Clone the Repository
 
 ```bash
 git clone https://github.com/Mratyunjay-ch-45/USER_CRUD_TEST.git
-
+cd USER_CRUD_TEST
 ```
 
 ---
 
-### 🔧 2. Run the Backend
+### 2. 🔧 Run the Backend
 
 ```bash
 cd backend
@@ -136,29 +96,41 @@ npm install
 node server.js
 ```
 
-> Your server will start on `http://localhost:8000`
+> Server starts at `http://localhost:8000`
 
 ---
 
-### 🌐 3. Run the Frontend 
+### 3. 🌐 Run the Frontend
 
 ```bash
-cd frontend
-cd react-app
+cd frontend/react-app
 npm install
 npm run dev
 ```
 
-> React app will open at `http://localhost:5173`
+> React app runs at `http://localhost:5173`
+
+---
+
+### 🔗 Frontend Pages to Access APIs
+
+| Page        | URL                                |
+| ----------- | ---------------------------------- |
+| Signup      | `http://localhost:5173/signup`     |
+| Login       | `http://localhost:5173/login`      |
+| Get User    | `http://localhost:5173/getuser`    |
+| Update User | `http://localhost:5173/updateuser` |
+| Delete User | Button available on Update page    |
+
+---
+
+## 📂 MongoDB Configuration
+
+Make sure MongoDB is running locally or remotely and your connection string is set in `server.js`:
+
+```js
+mongoose.connect("mongodb://127.0.0.1:27017/Keploy");
 ```
 
-manually go to this frontend routes to test the API's
-
-1.Signup:http://localhost:5173/signup
-2.Login:http://localhost:5173/login
-3.Get User:http://localhost:5173/getuser
-4.Update User:http://localhost:5173/updateuser 
-5.Delete User:The Update user page have a delete button to delete the user directly from there
-
-```
+---
 
